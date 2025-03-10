@@ -1,15 +1,15 @@
 const express = require('express');
 const cors = require('cors');
-const ollama = require('ollama');
+const { Ollama } = require('ollama');
 const app = express();
 const port = 3000;
 
-// Middleware
+const ollama = new Ollama({ host: 'http://localhost:11434' });
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
 
-// Ollama route
 app.post('/api/generate', async (req, res) => {
   try {
     const { prompt } = req.body;
